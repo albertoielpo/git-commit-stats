@@ -31,7 +31,7 @@ node dist/app.js
 ## Output example
 
 ```
-// NORMALIZE=false
+// NORMALIZE=true
 [
   { name: 'bernicerussell', value: 50 },
   { name: 'geraldinocalabresi', value: 16 },
@@ -39,7 +39,7 @@ node dist/app.js
   { name: 'noelinoavilesolivo', value: 9 },
 ]
 
-// NORMALIZE=true
+// NORMALIZE=false
 
 [
   { name: 'Bernice Russell', value: 49 },
