@@ -2,12 +2,16 @@ import { Service } from "./service";
 
 // init env file
 require("dotenv").config({ path: `${process.cwd()}/env/local.env` });
-const service = new Service();
 
-// git must be installed
-service.assertGitInstalled();
+// main function
+(() => {
+    const service = new Service();
 
-const conf = service.buildFromEnv();
-const stats = service.generateStats(conf);
+    // git must be installed
+    service.assertGitInstalled();
 
-console.log(stats);
+    const conf = service.buildFromEnv();
+    const stats = service.generateStats(conf);
+
+    console.log(stats);
+})();
