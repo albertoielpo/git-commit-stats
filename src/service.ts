@@ -44,7 +44,7 @@ export class Service {
             for (const part of parts) {
                 const valueName = part.trim().split("\t"); //stats + name
                 const uniqueKey =
-                    process.env.NORMALIZE === "false"
+                    process.env.NORMALIZE === "true"
                         ? valueName[1]
                               ?.split("@")[0]
                               .toLowerCase()
