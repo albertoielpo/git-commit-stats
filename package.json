@@ -1,0 +1,22 @@
+{
+    "name": "git-commit-stats",
+    "version": "1.0.0",
+    "description": "Git commit statistics. Count commit per user",
+    "main": "dist/app.js",
+    "scripts": {
+        "start": "tsc && node dist/app.js",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "build": "tsc"
+    },
+    "author": "Alberto Ielpo",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "~20.11.6",
+        "prettier": "~3.0.0",
+        "typescript": "~5.3.3"
+    },
+    "dependencies": {
+        "dotenv": "~16.4.1",
+        "simple-git": "~3.22.0"
+    }
+}
