@@ -43,20 +43,20 @@ export class Service {
             const parts = resStr.split("\n");
             for (const part of parts) {
                 const valueName = part.trim().split("\t"); //stats + name
-                const uniqueKey =
-                    process.env.NORMALIZE === "true"
-                        ? valueName[1]
-                              ?.split("@")[0]
-                              .toLowerCase()
-                              .replaceAll(" ", "")
-                              .replaceAll(".", "")
-                        : valueName[1];
+
+                let uniqueKey = valueName[1];
+                if (process.env.NORMALIZE === "true" && valueName[1]) {
+                    uniqueKey = valueName[1]
+                        .split("@")[0]
+                        .toLowerCase()
+                        .replaceAll(" ", "")
+                        .replaceAll(".", "");
+                }
 
                 if (statsRecord[uniqueKey] == null) {
                     statsRecord[uniqueKey] = 0;
                 }
-                statsRecord[uniqueKey] =
-                    Number(statsRecord[uniqueKey]) + Number(valueName[0]);
+                statsRecord[uniqueKey] += Number(valueName[0]);
             }
         }
 

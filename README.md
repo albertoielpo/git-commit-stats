@@ -4,7 +4,7 @@ Count commit per user
 
 ## Requirements
 
-node 18.17.1
+node > 16
 
 git
 
