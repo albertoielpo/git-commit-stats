@@ -18,13 +18,7 @@ require("dotenv").config({ path: `${process.cwd()}/env/local.env` });
 (() => {
     try {
         const service = new Service();
-
-        // git must be installed
-        service.assertGitInstalled();
-
-        const conf = service.buildFromEnv();
-        const stats = service.generateStats(conf);
-
+        const stats = service.generateStats();
         console.log(stats);
     } catch (error) {
         console.error(error);

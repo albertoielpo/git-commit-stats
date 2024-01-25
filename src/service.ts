@@ -4,7 +4,14 @@ import { ObjectsUtil } from "./objects.util";
 import { Configuration, Stats } from "./types";
 
 export class Service {
-    public assertGitInstalled(): void {
+    private configuration!: Configuration;
+
+    constructor() {
+        this.assertGitInstalled();
+        this.buildFromEnv();
+    }
+
+    private assertGitInstalled(): void {
         const data = child.execSync("git --version");
         const serialized = data.toString().toLowerCase();
         if (!serialized.startsWith("git version")) {
@@ -12,7 +19,7 @@ export class Service {
         }
     }
 
-    public buildFromEnv(): Configuration {
+    private buildFromEnv(): void {
         const baseDir = process.env.BASE_DIR;
 
         if (!baseDir) {
@@ -26,13 +33,13 @@ export class Service {
             throw new Error("repos not valid");
         }
 
-        return { baseDir, repos };
+        this.configuration = { baseDir, repos };
     }
 
-    public generateStats(conf: Configuration): Stats[] {
+    public generateStats(): Stats[] {
         const statsRecord: Record<string, number> = {};
-        for (const cur of conf.repos) {
-            const cwd = `${conf.baseDir}/${cur.trim()}`;
+        for (const cur of this.configuration.repos) {
+            const cwd = `${this.configuration.baseDir}/${cur.trim()}`;
             if (!existsSync(cwd)) {
                 console.warn(`${cwd} does not exist.. continue`);
                 continue;
