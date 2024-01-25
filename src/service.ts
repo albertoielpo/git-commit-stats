@@ -34,7 +34,7 @@ export class Service {
         for (const cur of conf.repos) {
             const cwd = `${conf.baseDir}/${cur.trim()}`;
             if (!existsSync(cwd)) {
-                console.error(`${cwd} does not exist... continue`);
+                console.warn(`${cwd} does not exist.. continue`);
                 continue;
             }
 
@@ -63,7 +63,7 @@ export class Service {
                     statsRecord[uniqueKey] += Number(valueName[0]);
                 }
             } catch (error) {
-                console.error(`Error examining ${cwd}. Is this a git repo?`);
+                console.warn(`Error examining ${cwd}. Is this a git repo?`);
             }
         }
 
