@@ -37,26 +37,33 @@ export class Service {
                 console.error(`${cwd} does not exist... continue`);
                 continue;
             }
-            const res = child.execSync("git shortlog -sn --all", { cwd: cwd });
-            const resStr = res.toString();
 
-            const parts = resStr.split("\n");
-            for (const part of parts) {
-                const valueName = part.trim().split("\t"); //stats + name
+            try {
+                const res = child.execSync("git shortlog -sn --all", {
+                    cwd: cwd
+                });
+                const resStr = res.toString();
 
-                let uniqueKey = valueName[1];
-                if (process.env.NORMALIZE === "true" && valueName[1]) {
-                    uniqueKey = valueName[1]
-                        .split("@")[0]
-                        .toLowerCase()
-                        .replaceAll(" ", "")
-                        .replaceAll(".", "");
+                const parts = resStr.split("\n");
+                for (const part of parts) {
+                    const valueName = part.trim().split("\t"); //stats + name
+
+                    let uniqueKey = valueName[1];
+                    if (process.env.NORMALIZE === "true" && valueName[1]) {
+                        uniqueKey = valueName[1]
+                            .split("@")[0]
+                            .toLowerCase()
+                            .replaceAll(" ", "")
+                            .replaceAll(".", "");
+                    }
+
+                    if (statsRecord[uniqueKey] == null) {
+                        statsRecord[uniqueKey] = 0;
+                    }
+                    statsRecord[uniqueKey] += Number(valueName[0]);
                 }
-
-                if (statsRecord[uniqueKey] == null) {
-                    statsRecord[uniqueKey] = 0;
-                }
-                statsRecord[uniqueKey] += Number(valueName[0]);
+            } catch (error) {
+                console.error(`Error examining ${cwd}. Is this a git repo?`);
             }
         }
 
