@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import * as chalk from "chalk";
 import { Service } from "./service";
 
 // redirect console.warn and console.error to console.log colored with chalk
