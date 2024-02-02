@@ -5,8 +5,8 @@ import { Service } from "./service";
 console.warn = (data: unknown) => console.log(chalk.yellow(data));
 console.error = (data: unknown) => console.log(chalk.red(data));
 
-// init env file
-require("dotenv").config({ path: `${process.cwd()}/env/local.env` });
+const appEnv = process.env.APP_ENV ?? "local";
+require("dotenv").config({ path: `${process.cwd()}/env/${appEnv}.env` });
 
 // main function
 (() => {
