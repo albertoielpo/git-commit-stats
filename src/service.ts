@@ -46,9 +46,12 @@ export class Service {
             }
 
             try {
-                const res = child.execSync("git shortlog -sn --all", {
-                    cwd: cwd
-                });
+                const res = child.execSync(
+                    "git shortlog -sn --all --no-merges",
+                    {
+                        cwd: cwd
+                    }
+                );
                 const resStr = res.toString();
 
                 const parts = resStr.split("\n");

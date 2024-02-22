@@ -1,6 +1,6 @@
 {
     "name": "git-commit-stats",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Git commit statistics. Count commit per user",
     "main": "dist/app.js",
     "scripts": {
